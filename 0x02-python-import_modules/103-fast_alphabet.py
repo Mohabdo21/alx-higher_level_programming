@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-print(*(map(chr, range(65, 91))), sep='')
+
+print(bytes(range(ord('A'), ord('Z')+1)).decode())
