@@ -1,7 +1,7 @@
 0x00. Python - Hello, World
 ===========================
 
-This project is part of the curriculum Alx - SE of software engineering. The main objective is to understand and implement the basics of Python programming.
+This project is part of the Alx - SE curriculum of software engineering. The main objective is to understand and implement the basics of Python programming.
 
 Learning Objectives
 -------------------
