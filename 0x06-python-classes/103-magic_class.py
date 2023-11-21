@@ -1,4 +1,4 @@
-#!/use/bin/python3
+#!/usr/bin/python3
     """Replicates the behavior described in the given bytecode"""
 
 import math
