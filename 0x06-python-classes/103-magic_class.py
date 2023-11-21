@@ -1,12 +1,11 @@
 #!/use/bin/python3
+    """Replicates the behavior described in the given bytecode
+    """
 import math
 
 
-"""Defines a class MagicClass"""
-
-
 class MagicClass:
-    """Replicates the behavior described in the given bytecode
+    """Defines a class MagicClass
     """
 
     def __init__(self, radius=0):
