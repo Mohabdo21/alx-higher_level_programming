@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-    """Replicates the behavior described in the given bytecode"""
+"""Replicates the behavior described in the given bytecode"""
 
 import math
 
