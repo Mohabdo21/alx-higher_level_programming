@@ -3,7 +3,9 @@
 
 
 class Rectangle:
-    """A Rectangle class with width, height, area, perimeter, and string representation"""
+    """A Rectangle class with width, height, area,
+    perimeter, and string representation
+    """
 
     def __init__(self, width=0, height=0):
         """Initialize a new Rectangle instance"""
