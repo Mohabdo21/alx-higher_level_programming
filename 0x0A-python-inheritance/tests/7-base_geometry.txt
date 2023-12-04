@@ -129,3 +129,59 @@
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [TypeError] float_str must be an integer
 
+# Test with a negative float
+>>> try:
+...    bg.integer_validator("neg_float", -9.5)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] neg_float must be an integer
+
+# Test with a large float
+>>> try:
+...    bg.integer_validator("large_float", 10**18 + 0.5)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] large_float must be an integer
+
+# Test with an empty list
+>>> try:
+...    bg.integer_validator("empty_list", [])
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] empty_list must be an integer
+
+# Test with an empty dictionary
+>>> try:
+...    bg.integer_validator("empty_dict", {})
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] empty_dict must be an integer
+
+# Test with an empty tuple
+>>> try:
+...    bg.integer_validator("empty_tuple", ())
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] empty_tuple must be an integer
+
+# Test with a None value
+>>> try:
+...    bg.integer_validator("none_value", None)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] none_value must be an integer
+
+# Test with a boolean False value
+>>> try:
+...    bg.integer_validator("false_value", False)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] false_value must be an integer
+
+# Test with a boolean True value
+>>> try:
+...    bg.integer_validator("true_value", True)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] true_value must be an integer
+
