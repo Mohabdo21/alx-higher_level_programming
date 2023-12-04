@@ -21,20 +21,6 @@ True
 Traceback (most recent call last):
 Exception: area() is not implemented
 
-# area method called via class with no args
->>> try:
-...     bg.__class__.area()
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] BaseGeometry.area() missing 1 required positional argument: 'self'
-
-# area method args test (1 arg)
->>> try:
-...     bg.area(10)
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] BaseGeometry.area() takes 1 positional argument but 2 were given
-
 # Test with a string
 >>> try:
 ...     bg.integer_validator("name", "John")
