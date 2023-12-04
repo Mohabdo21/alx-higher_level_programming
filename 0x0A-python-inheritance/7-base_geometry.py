@@ -39,4 +39,4 @@ class BaseGeometry:
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
         if value > 10**6:
-            raise ValueError("{} must be less than 1,000,000".format(name))
+            raise ValueError("{} must be greater than 0".format(name))
