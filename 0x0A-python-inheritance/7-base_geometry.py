@@ -30,10 +30,12 @@ class BaseGeometry:
             TypeError: If value is not an integer.
             ValueError: If value is less or equal to 0.
         """
-#        if value is None:
-#            raise TypeError("{} must be an integer".format(name))
-#        if type(value) is bool:
-#            raise TypeError("{} must be an integer".format(name))
+        if type(name) is not str:
+            raise TypeError("{} must be a string".format(name))
+        if value is None:
+            raise TypeError("{} must be an integer".format(name))
+        if type(value) is bool:
+            raise TypeError("{} must be an integer".format(name))
         if type(value) is not int:
             raise TypeError("{} must be an integer".format(name))
         if value <= 0:
