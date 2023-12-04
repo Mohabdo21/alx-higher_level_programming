@@ -84,3 +84,48 @@
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [TypeError] my_tuple must be an integer
 
+# Test with a large negative integer
+>>> try:
+...     bg.integer_validator("large_neg_int", -10**18)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] large_neg_int must be greater than 0
+
+# Test with the maximum possible integer
+>>> bg.integer_validator("max_int", 2**31 - 1)
+
+# Test with the minimum possible integer
+>>> try:
+...     bg.integer_validator("min_int", -2**31)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] min_int must be greater than 0
+
+# Test with an empty string
+>>> try:
+...     bg.integer_validator("empty_str", "")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] empty_str must be an integer
+
+# Test with a string containing a number
+>>> try:
+...     bg.integer_validator("num_str", "123")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] num_str must be an integer
+
+# Test with a string containing a negative number
+>>> try:
+...     bg.integer_validator("neg_num_str", "-123")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] neg_num_str must be an integer
+
+# Test with a string containing a float
+>>> try:
+...     bg.integer_validator("float_str", "9.5")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] float_str must be an integer
+
