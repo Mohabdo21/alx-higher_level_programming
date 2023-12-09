@@ -17,10 +17,10 @@ class TestRectangle(unittest.TestCase):
     def test_id(self):
         """Test for id."""
         r1 = Rectangle(10, 2)
-        self.assertEqual(r1.id, 12)
+        self.assertEqual(r1.id, 14)
 
         r2 = Rectangle(2, 10)
-        self.assertEqual(r2.id, 13)
+        self.assertEqual(r2.id, 15)
 
         r3 = Rectangle(10, 2, 0, 0, 12)
         self.assertEqual(r3.id, 12)
@@ -82,6 +82,22 @@ class TestRectangle(unittest.TestCase):
         sys.stdout = sys.__stdout__
         self.assertEqual(output.getvalue(), expected_output)
 
+        r = Rectangle(2, 3, 2, 2)
+        expected_output = "\n\n  ##\n  ##\n  ##\n"
+        output = StringIO()
+        sys.stdout = output
+        r.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), expected_output)
+
+        r = Rectangle(3, 2, 1, 0)
+        expected_output = " ###\n ###\n"
+        output = StringIO()
+        sys.stdout = output
+        r.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), expected_output)
+
     # Test __str__ Function
     def test_str(self):
         """Test for __str__."""
@@ -89,7 +105,8 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(r), "[Rectangle] (12) 2/1 - 4/6")
 
         r = Rectangle(5, 5, 1)
-        self.assertEqual(str(r), "[Rectangle] (14) 1/0 - 5/5")
+        self.assertEqual(str(r), "[Rectangle] (16) 1/0 - 5/5")
+
 
 
 if __name__ == "__main__":
