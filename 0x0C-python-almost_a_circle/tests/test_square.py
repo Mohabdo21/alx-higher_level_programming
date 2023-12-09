@@ -15,13 +15,13 @@ class TestSquare(unittest.TestCase):
     def test_id(self):
         """Test for id."""
         s1 = Square(5)
-        self.assertEqual(s1.id, 18)
+        self.assertEqual(s1.id, 20)
 
         s2 = Square(2, 2)
-        self.assertEqual(s2.id, 19)
+        self.assertEqual(s2.id, 21)
 
         s3 = Square(3, 1, 3)
-        self.assertEqual(s3.id, 20)
+        self.assertEqual(s3.id, 22)
 
     def test_str(self):
         """Test for __str__."""
