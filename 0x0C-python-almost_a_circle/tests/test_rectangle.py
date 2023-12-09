@@ -15,10 +15,10 @@ class TestRectangle(unittest.TestCase):
     def test_id(self):
         """Test for id."""
         r1 = Rectangle(10, 2)
-        self.assertEqual(r1.id, 7)
+        self.assertEqual(r1.id, 10)
 
         r2 = Rectangle(2, 10)
-        self.assertEqual(r2.id, 8)
+        self.assertEqual(r2.id, 11)
 
         r3 = Rectangle(10, 2, 0, 0, 12)
         self.assertEqual(r3.id, 12)
@@ -48,6 +48,18 @@ class TestRectangle(unittest.TestCase):
         # Test with negative y
         with self.assertRaises(ValueError):
             r = Rectangle(10, 2, 3, -4)
+
+    # Test Area Function
+    def test_area(self):
+        """Test for area."""
+        r = Rectangle(3, 4)
+        self.assertEqual(r.area(), 12)
+
+        r = Rectangle(5, 10)
+        self.assertEqual(r.area(), 50)
+
+        r = Rectangle(8, 7)
+        self.assertEqual(r.area(), 56)
 
 
 if __name__ == "__main__":
