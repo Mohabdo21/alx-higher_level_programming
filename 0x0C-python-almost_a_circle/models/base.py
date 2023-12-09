@@ -3,6 +3,7 @@
 import json
 import os
 import csv
+import turtle
 
 
 class Base:
@@ -109,3 +110,36 @@ class Base:
                                 }
                     list_objs.append(cls.create(**dictionary))
         return list_objs
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Open a window and draw all the Rectangles and Squares."""
+        window = turtle.Screen()
+        window.bgcolor("white")
+        draw_turtle = turtle.Turtle()
+
+        for rect in list_rectangles:
+            draw_turtle.penup()
+            draw_turtle.goto(rect.x, rect.y)
+            draw_turtle.pendown()
+            draw_turtle.color("black", "red")
+            draw_turtle.begin_fill()
+            for _ in range(2):
+                draw_turtle.forward(rect.width)
+                draw_turtle.right(90)
+                draw_turtle.forward(rect.height)
+                draw_turtle.right(90)
+            draw_turtle.end_fill()
+
+        for square in list_squares:
+            draw_turtle.penup()
+            draw_turtle.goto(square.x, square.y)
+            draw_turtle.pendown()
+            draw_turtle.color("black", "blue")
+            draw_turtle.begin_fill()
+            for _ in range(4):
+                draw_turtle.forward(square.size)
+                draw_turtle.right(90)
+            draw_turtle.end_fill()
+
+        window.exitonclick()
