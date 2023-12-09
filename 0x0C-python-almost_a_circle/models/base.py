@@ -4,6 +4,7 @@ import json
 import os
 import csv
 import turtle
+import random
 
 
 class Base:
@@ -117,12 +118,13 @@ class Base:
         window = turtle.Screen()
         window.bgcolor("white")
         draw_turtle = turtle.Turtle()
+        colors = ["red", "blue", "green", "yellow", "purple", "orange"]
 
         for rect in list_rectangles:
             draw_turtle.penup()
             draw_turtle.goto(rect.x, rect.y)
             draw_turtle.pendown()
-            draw_turtle.color("black", "red")
+            draw_turtle.color("black", random.choice(colors))
             draw_turtle.begin_fill()
             for _ in range(2):
                 draw_turtle.forward(rect.width)
@@ -135,7 +137,7 @@ class Base:
             draw_turtle.penup()
             draw_turtle.goto(square.x, square.y)
             draw_turtle.pendown()
-            draw_turtle.color("black", "blue")
+            draw_turtle.color("black", random.choice(colors))
             draw_turtle.begin_fill()
             for _ in range(4):
                 draw_turtle.forward(square.size)
