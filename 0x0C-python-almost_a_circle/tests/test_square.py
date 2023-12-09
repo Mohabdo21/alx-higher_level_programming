@@ -47,8 +47,8 @@ class TestSquare(unittest.TestCase):
         s.update(89, 2, 3, 4)
         self.assertEqual(s.id, 89)
         self.assertEqual(s.size, 2)
-        self.assertEqual(s.x, 4)
-        self.assertEqual(s.y, 5)
+        self.assertEqual(s.x, 3)
+        self.assertEqual(s.y, 4)
 
         s.update(y=1, size=2, x=3, id=90)
         self.assertEqual(s.id, 90)
