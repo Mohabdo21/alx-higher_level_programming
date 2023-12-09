@@ -111,7 +111,7 @@ class TestRectangle(unittest.TestCase):
     def test_update(self):
         """Test for update."""
         r = Rectangle(10, 10, 10, 10)
-    
+
         r.update(89)
         self.assertEqual(r.id, 89)
         self.assertEqual(r.width, 10)
@@ -146,6 +146,34 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r.height, 3)
         self.assertEqual(r.x, 4)
         self.assertEqual(r.y, 5)
+
+        r.update(id=90)
+        self.assertEqual(r.id, 90)
+        self.assertEqual(r.width, 2)
+        self.assertEqual(r.height, 3)
+        self.assertEqual(r.x, 4)
+        self.assertEqual(r.y, 5)
+
+        r.update(width=3, x=2)
+        self.assertEqual(r.id, 90)
+        self.assertEqual(r.width, 3)
+        self.assertEqual(r.height, 3)
+        self.assertEqual(r.x, 2)
+        self.assertEqual(r.y, 5)
+
+        r.update(y=1, width=2, x=3, id=91)
+        self.assertEqual(r.id, 91)
+        self.assertEqual(r.width, 2)
+        self.assertEqual(r.height, 3)
+        self.assertEqual(r.x, 3)
+        self.assertEqual(r.y, 1)
+
+        r.update(x=1, height=2, y=3, width=4)
+        self.assertEqual(r.id, 91)
+        self.assertEqual(r.width, 4)
+        self.assertEqual(r.height, 2)
+        self.assertEqual(r.x, 1)
+        self.assertEqual(r.y, 3)
 
 
 if __name__ == "__main__":
