@@ -2,6 +2,7 @@
 """Module for Base class."""
 import json
 import os
+import csv
 
 
 class Base:
@@ -40,7 +41,7 @@ class Base:
         list_dicts = []
         if list_objs is not None:
             list_dicts = [obj.to_dictionary() for obj in list_objs]
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding="utf-8") as f:
             f.write(cls.to_json_string(list_dicts))
 
     @staticmethod
@@ -66,6 +67,45 @@ class Base:
         filename = cls.__name__ + ".json"
         if not os.path.isfile(filename):
             return []
-        with open(filename, 'r') as f:
+        with open(filename, 'r', encoding="utf-8") as f:
             list_dicts = cls.from_json_string(f.read())
         return [cls.create(**d) for d in list_dicts]
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Write the CSV string representation of list_objs to a file."""
+        filename = cls.__name__ + ".csv"
+        with open(filename, 'w', encoding="utf-8", newline='') as csvfile:
+            if list_objs is not None:
+                writer = csv.writer(csvfile)
+                if cls.__name__ == "Rectangle":
+                    for obj in list_objs:
+                        writer.writerow(
+                                [obj.id, obj.width, obj.height, obj.x, obj.y]
+                                )
+                elif cls.__name__ == "Square":
+                    for obj in list_objs:
+                        writer.writerow([obj.id, obj.size, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Return a list of instances."""
+        filename = cls.__name__ + ".csv"
+        list_objs = []
+        if os.path.isfile(filename):
+            with open(filename, 'r', encoding="utf-8") as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    if cls.__name__ == "Rectangle":
+                        dictionary = {
+                                "id": int(row[0]), "width": int(row[1]),
+                                "height": int(row[2]), "x": int(row[3]),
+                                "y": int(row[4])
+                                }
+                    elif cls.__name__ == "Square":
+                        dictionary = {
+                                "id": int(row[0]), "size": int(row[1]),
+                                "x": int(row[2]), "y": int(row[3])
+                                }
+                    list_objs.append(cls.create(**dictionary))
+        return list_objs

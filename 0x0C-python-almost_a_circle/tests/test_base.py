@@ -60,7 +60,7 @@ class TestBase(unittest.TestCase):
         r2 = Rectangle(2, 4)
         Rectangle.save_to_file([r1, r2])
 
-        with open("Rectangle.json", "r") as file:
+        with open("Rectangle.json", "r", encoding="utf-8") as file:
             content = file.read()
         self.assertEqual(
                 content,
@@ -128,6 +128,29 @@ class TestBase(unittest.TestCase):
             os.remove("Rectangle.json")
         if os.path.exists("Square.json"):
             os.remove("Square.json")
+
+    def test_save_load_from_file_csv(self):
+        """Test the save_to_file_csv and load_from_file_csv methods."""
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file_csv(list_rectangles_input)
+        list_rectangles_output = Rectangle.load_from_file_csv()
+        self.assertEqual([r.to_dictionary() for r in list_rectangles_input],
+                         [r.to_dictionary() for r in list_rectangles_output])
+
+        s1 = Square(5)
+        s2 = Square(7, 9, 1)
+        list_squares_input = [s1, s2]
+        Square.save_to_file_csv(list_squares_input)
+        list_squares_output = Square.load_from_file_csv()
+        self.assertEqual([s.to_dictionary() for s in list_squares_input],
+                         [s.to_dictionary() for s in list_squares_output])
+
+        if os.path.exists("Rectangle.csv"):
+            os.remove("Rectangle.csv")
+        if os.path.exists("Square.csv"):
+            os.remove("Square.csv")
 
 
 if __name__ == "__main__":
