@@ -5,6 +5,7 @@ import os
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
+from models.square import Square
 
 
 class TestBase(unittest.TestCase):
@@ -61,10 +62,49 @@ class TestBase(unittest.TestCase):
 
         with open("Rectangle.json", "r") as file:
             content = file.read()
-        self.assertEqual(content, '[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7}, {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]')
+        self.assertEqual(
+                content,
+                '[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7},'
+                ' {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]'
+                )
 
         if os.path.exists("Rectangle.json"):
             os.remove("Rectangle.json")
+
+    def test_from_json_string(self):
+        """Test the from_json_string method."""
+        json_str = (
+                '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8},'
+                ' {"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]'
+                )
+        json_list = Base.from_json_string(json_str)
+        self.assertEqual(
+                json_list,
+                [{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8},
+                    {"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]
+                )
+
+        json_str_empty = '[]'
+        json_list_empty = Base.from_json_string(json_str_empty)
+        self.assertEqual(json_list_empty, [])
+
+        json_str_none = None
+        json_list_none = Base.from_json_string(json_str_none)
+        self.assertEqual(json_list_none, [])
+
+    def test_create(self):
+        """Test the create method."""
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertEqual(str(r1), str(r2))
+        self.assertNotEqual(r1, r2)
+
+        s1 = Square(3, 1)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertEqual(str(s1), str(s2))
+        self.assertNotEqual(s1, s2)
 
 
 if __name__ == "__main__":
