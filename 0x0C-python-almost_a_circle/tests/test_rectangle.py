@@ -82,6 +82,15 @@ class TestRectangle(unittest.TestCase):
         sys.stdout = sys.__stdout__
         self.assertEqual(output.getvalue(), expected_output)
 
+    # Test __str__ Function
+    def test_str(self):
+        """Test for __str__."""
+        r = Rectangle(4, 6, 2, 1, 12)
+        self.assertEqual(str(r), "[Rectangle] (12) 2/1 - 4/6")
+
+        r = Rectangle(5, 5, 1)
+        self.assertEqual(str(r), "[Rectangle] (14) 1/0 - 5/5")
+
 
 if __name__ == "__main__":
     unittest.main()
