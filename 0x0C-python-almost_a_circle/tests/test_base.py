@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """Module for Base class tests."""
 
+import os
 import unittest
 from models.base import Base
+from models.rectangle import Rectangle
 
 
 class TestBase(unittest.TestCase):
@@ -50,6 +52,19 @@ class TestBase(unittest.TestCase):
         # Test with None id after setting id
         b10 = Base()
         self.assertEqual(b10.id, 1)
+
+    def test_save_to_file(self):
+        """Test the save_to_file method."""
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file([r1, r2])
+
+        with open("Rectangle.json", "r") as file:
+            content = file.read()
+        self.assertEqual(content, '[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7}, {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]')
+
+        if os.path.exists("Rectangle.json"):
+            os.remove("Rectangle.json")
 
 
 if __name__ == "__main__":

@@ -17,10 +17,10 @@ class TestRectangle(unittest.TestCase):
     def test_id(self):
         """Test for id."""
         r1 = Rectangle(10, 2)
-        self.assertEqual(r1.id, 14)
+        self.assertEqual(r1.id, 15)
 
         r2 = Rectangle(2, 10)
-        self.assertEqual(r2.id, 15)
+        self.assertEqual(r2.id, 16)
 
         r3 = Rectangle(10, 2, 0, 0, 12)
         self.assertEqual(r3.id, 12)
@@ -105,7 +105,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(r), "[Rectangle] (12) 2/1 - 4/6")
 
         r = Rectangle(5, 5, 1)
-        self.assertEqual(str(r), "[Rectangle] (16) 1/0 - 5/5")
+        self.assertEqual(str(r), "[Rectangle] (17) 1/0 - 5/5")
 
     # Test update Function
     def test_update(self):
@@ -180,7 +180,7 @@ class TestRectangle(unittest.TestCase):
         r1 = Rectangle(10, 2, 1, 9)
         r1_dictionary = r1.to_dictionary()
         self.assertEqual(r1_dictionary, {
-            'x': 1, 'y': 9, 'id': 17,
+            'x': 1, 'y': 9, 'id': 18,
             'height': 2, 'width': 10
             })
         self.assertTrue(type(r1_dictionary) is dict)
