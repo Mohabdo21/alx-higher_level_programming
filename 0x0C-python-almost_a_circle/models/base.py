@@ -115,23 +115,15 @@ class Base:
     @staticmethod
     def draw(list_rectangles, list_squares):
         """Open a window and draw all the Rectangles and Squares."""
-
-        # Set up the window
         window = turtle.Screen()
         window.bgcolor("white")
-        window.title("A World of Shapes")
         draw_turtle = turtle.Turtle()
-        draw_turtle.speed(1)  # Increase drawing speed
 
-        # Define color palette
-        colors = ["red", "blue", "green", "yellow", "purple", "orange"]
-
-        # Draw Rectangles
         for rect in list_rectangles:
             draw_turtle.penup()
             draw_turtle.goto(rect.x, rect.y)
             draw_turtle.pendown()
-            draw_turtle.fillcolor(random.choice(colors))
+            draw_turtle.color("black", "red")
             draw_turtle.begin_fill()
             for _ in range(2):
                 draw_turtle.forward(rect.width)
@@ -140,41 +132,15 @@ class Base:
                 draw_turtle.right(90)
             draw_turtle.end_fill()
 
-            # Add a fun border with random color
-            draw_turtle.pencolor("black")
-            draw_turtle.penup()
-            draw_turtle.forward(5)  # Offset for border
-            draw_turtle.pendown()
-            draw_turtle.begin_fill()
-            for _ in range(2):
-                draw_turtle.forward(rect.width + 10)
-                draw_turtle.right(90)
-                draw_turtle.forward(rect.height + 10)
-                draw_turtle.right(90)
-            draw_turtle.end_fill()
-
-        # Draw Squares
         for square in list_squares:
             draw_turtle.penup()
             draw_turtle.goto(square.x, square.y)
             draw_turtle.pendown()
-            draw_turtle.fillcolor(random.choice(colors))
+            draw_turtle.color("black", "blue")
             draw_turtle.begin_fill()
             for _ in range(4):
                 draw_turtle.forward(square.size)
                 draw_turtle.right(90)
             draw_turtle.end_fill()
 
-            # Add a fun star on top
-            draw_turtle.pencolor("yellow")
-            draw_turtle.penup()
-            draw_turtle.goto(
-                    square.x + square.size / 2, square.y + square.size
-                    )
-            draw_turtle.pendown()
-            for _ in range(5):
-                draw_turtle.forward(square.size / 5)
-                draw_turtle.right(144)
-
-        # Keep the window open until clicked
         window.exitonclick()
