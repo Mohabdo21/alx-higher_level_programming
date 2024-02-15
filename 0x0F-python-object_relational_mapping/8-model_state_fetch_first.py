@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module to list all State objects from a database"""
+"""Module to fetch the first State object from a database"""
 
 import sys
 
@@ -25,7 +25,11 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State).order_by(State.id):
+    state = session.query(State).order_by(State.id).first()
+
+    if state is not None:
         print("{}: {}".format(state.id, state.name))
+    else:
+        print("Nothing")
 
     session.close()
