@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Module to define a State class"""
+"""
+This module defines a State class that inherits from Base.
+"""
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -9,7 +11,15 @@ Base = declarative_base()
 
 
 class State(Base):
-    """State class"""
+    """
+    This class is linked to the states table and has a relationship
+    with the City class.
+
+    Attributes:
+        id (Column): The state's id.
+        name (Column): The state's name.
+        cities (relationship): The cities in the state.
+    """
 
     __tablename__ = "states"
     id = Column(
