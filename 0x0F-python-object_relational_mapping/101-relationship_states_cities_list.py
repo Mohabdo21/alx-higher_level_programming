@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import joinedload, sessionmaker
 
 from relationship_city import City
-from relationship_state import Base, State
+from relationship_state import State
 
 if __name__ == "__main__":
     username = sys.argv[1]
@@ -24,8 +24,6 @@ if __name__ == "__main__":
             ),
         pool_pre_ping=True,
     )
-
-    Base.metadata.create_all(engine)
 
     Session = sessionmaker(bind=engine)
     session = Session()
