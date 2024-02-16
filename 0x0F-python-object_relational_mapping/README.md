@@ -31,7 +31,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Usage
+## Usage
 
 All scripts in this project are executable and are designed to interact with a MySQL database. Each script should be run using the following format:
 
