@@ -31,10 +31,20 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Usage
+### Usage
 
-All scripts are executable, use `./` to run:
+All scripts in this project are executable and are designed to interact with a MySQL database. Each script should be run using the following format:
 
 ```bash
-./script_name.py
+./script_name.py mysql_username mysql_password database_name
 ```
+
+Here, `mysql_username` is the username for your MySQL server, `mysql_password` is the password, and `database_name` is the name of the database you want to interact with.
+
+For example, if you want to run the `101-relationship_states_cities_list.py` script with `root` as the username and password, and `hbtn_0e_101_usa` as the database name, you would use the following command:
+
+```bash
+./101-relationship_states_cities_list.py root root hbtn_0e_101_usa
+```
+
+Please replace `script_name.py`, `mysql_username`, `mysql_password`, and `database_name` with the actual values based on your setup and the specific script you want to run.
