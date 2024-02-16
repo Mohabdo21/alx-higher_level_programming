@@ -33,8 +33,8 @@ pip install -r requirements.txt
 
 ## Usage
 
-To run the scripts, use the following command:
+All scripts are executable, use `./` to run:
 
 ```bash
-python3 script_name.py
+./script_name.py
 ```
