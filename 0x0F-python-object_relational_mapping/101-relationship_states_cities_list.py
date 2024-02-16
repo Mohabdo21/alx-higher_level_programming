@@ -39,10 +39,11 @@ def main():
 
         # Query states with eager loading for cities, ordered by state ID
         for state in (
-            session.query(State).outerjoin(City).order_by(
-                State.id, City.id
-                ).all()
-        ):
+                session.query(State)
+                .options(joinedload(State.cities))
+                .outerjoin(City)
+                .order_by(State.id, City.id)
+                ):
             print(f"{state.id}: {state.name}")
             for city in state.cities:
                 print(f"\t{city.id}: {city.name}")
