@@ -39,9 +39,9 @@ def main():
 
         # Query states with eager loading for cities, ordered by state ID
         for state in (
-            session.query(State).options(
-                joinedload(State.cities)
-                ).order_by(State.id)
+            session.query(State).outerjoin(City).order_by(
+                State.id, City.id
+                ).all()
         ):
             print(f"{state.id}: {state.name}")
             for city in state.cities:
