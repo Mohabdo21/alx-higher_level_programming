@@ -17,7 +17,11 @@ if __name__ == "__main__":
     database = sys.argv[3]
 
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(username, password, database),
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+            username,
+            password,
+            database
+            ),
         pool_pre_ping=True,
     )
 
@@ -27,7 +31,9 @@ if __name__ == "__main__":
     session = Session()
 
     for state in (
-        session.query(State).options(joinedload(State.cities)).order_by(State.id)
+        session.query(State).options(
+            joinedload(State.cities)
+            ).order_by(State.id)
     ):
         print("{}: {}".format(state.id, state.name))
         for city in state.cities:
