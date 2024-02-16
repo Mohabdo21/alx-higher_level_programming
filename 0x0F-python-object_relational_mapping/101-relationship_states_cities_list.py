@@ -2,16 +2,16 @@
 """
 Module to list all State objects and corresponding City objects from a database
 """
-
-import sys
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import joinedload, sessionmaker
-
-from relationship_city import City
-from relationship_state import State
-
 if __name__ == "__main__":
+
+    import sys
+
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import joinedload, sessionmaker
+
+    from relationship_city import City
+    from relationship_state import State
+
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
