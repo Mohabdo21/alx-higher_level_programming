@@ -17,11 +17,7 @@ if __name__ == "__main__":
     database = sys.argv[3]
 
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
-            username,
-            password,
-            database
-            ),
+        f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}",
         pool_pre_ping=True,
     )
 
@@ -33,8 +29,8 @@ if __name__ == "__main__":
             joinedload(State.cities)
             ).order_by(State.id)
     ):
-        print("{}: {}".format(state.id, state.name))
+        print(f"{state.id}: {state.name}")
         for city in state.cities:
-            print("\t{}: {}".format(city.id, city.name))
+            print(f"\t{city.id}: {city.name}")
 
     session.close()
