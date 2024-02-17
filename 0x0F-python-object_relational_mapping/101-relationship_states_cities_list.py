@@ -17,7 +17,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-
 def main():
     """Connects to a database, retrieves data, and prints results."""
 
