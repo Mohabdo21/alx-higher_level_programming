@@ -10,21 +10,16 @@ Usage: script.py <username> <password> <database>
 """
 
 import sys
+from relationship_state import Base, State
+from relationship_city import City
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import joinedload, sessionmaker
+from sqlalchemy.orm import sessionmaker
 
-from relationship_city import City
-from relationship_state import Base, State
 
 
 def main():
     """Connects to a database, retrieves data, and prints results."""
-
-    # Check command-line arguments
-    if len(sys.argv) != 4:
-        print("Usage: script.py <username> <password> <database>")
-        sys.exit(1)
 
     # Retrieve credentials from command-line arguments
     username = sys.argv[1]
@@ -42,7 +37,7 @@ def main():
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State):
+    for state in session.query(State).all():
         print("{}: {}".format(state.id, state.name))
         # Query states with eager loading for cities, ordered by state ID
 
