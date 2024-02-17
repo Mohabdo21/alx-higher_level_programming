@@ -10,11 +10,12 @@ Usage: script.py <username> <password> <database>
 """
 
 import sys
-from relationship_state import Base, State
-from relationship_city import City
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import joinedload, sessionmaker
+
+from relationship_city import City
+from relationship_state import State
 
 
 def main():
@@ -30,16 +31,14 @@ def main():
         f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}",
         pool_pre_ping=True,
     )
-    Base.metadata.create_all(engine)
+    #    Base.metadata.create_all(engine)
 
     # Create session using sessionmaker
     Session = sessionmaker(bind=engine)
     session = Session()
 
     # Query states with eager loading for cities, ordered by state ID
-    for state in (
-            session.query(State).order_by(State.id)
-            ):
+    for state in session.query(State).order_by(State.id):
         print(f"{state.id}: {state.name}")
         for city in state.cities:
             print(f"\t{city.id}: {city.name}")
