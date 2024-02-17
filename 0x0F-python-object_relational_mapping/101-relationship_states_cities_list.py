@@ -14,7 +14,7 @@ from relationship_state import Base, State
 from relationship_city import City
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import joinedload, sessionmaker
 
 
 def main():
@@ -36,20 +36,18 @@ def main():
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State).all():
-        print("{}: {}".format(state.id, state.name))
-        # Query states with eager loading for cities, ordered by state ID
+    # Query states with eager loading for cities, ordered by state ID
 
 
-#        for state in (
-#            session.query(State)
-#            .options(joinedload(State.cities))
-#            .outerjoin(City)
-#            .order_by(State.id, City.id)
-#        ):
-#            print(f"{state.id}: {state.name}")
-#            for city in state.cities:
-#                print(f"\t{city.id}: {city.name}")
+    for state in (
+        session.query(State)
+        .options(joinedload(State.cities))
+        .outerjoin(City)
+        .order_by(State.id, City.id)
+        ):
+        print(f"{state.id}: {state.name}")
+        for city in state.cities:
+            print(f"\t{city.id}: {city.name}")
 
 
 if __name__ == "__main__":
