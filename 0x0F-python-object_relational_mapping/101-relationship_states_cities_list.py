@@ -37,14 +37,9 @@ def main():
     session = Session()
 
     # Query states with eager loading for cities, ordered by state ID
-
-
     for state in (
-        session.query(State)
-        .options(joinedload(State.cities))
-        .outerjoin(City)
-        .order_by(State.id, City.id)
-        ):
+            session.query(State).order_by(State.id)
+            ):
         print(f"{state.id}: {state.name}")
         for city in state.cities:
             print(f"\t{city.id}: {city.name}")
