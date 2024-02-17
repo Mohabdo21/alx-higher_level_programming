@@ -43,16 +43,18 @@ def main():
         Session = sessionmaker(bind=engine)
         session = Session()
 
+        for state in session.query(State):
+            print('{}: {}'.format(state.id, state.name))
         # Query states with eager loading for cities, ordered by state ID
-        for state in (
-            session.query(State)
-            .options(joinedload(State.cities))
-            .outerjoin(City)
-            .order_by(State.id, City.id)
-        ):
-            print(f"{state.id}: {state.name}")
-            for city in state.cities:
-                print(f"\t{city.id}: {city.name}")
+#        for state in (
+#            session.query(State)
+#            .options(joinedload(State.cities))
+#            .outerjoin(City)
+#            .order_by(State.id, City.id)
+#        ):
+#            print(f"{state.id}: {state.name}")
+#            for city in state.cities:
+#                print(f"\t{city.id}: {city.name}")
 
     except SQLAlchemyError as e:
         print(f"Database error: {e}")
