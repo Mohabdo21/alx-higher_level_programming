@@ -12,11 +12,10 @@ Usage: script.py <username> <password> <database>
 import sys
 
 from sqlalchemy import create_engine
-from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload, sessionmaker
 
 from relationship_city import City
-from relationship_state import State
+from relationship_state import Base, State
 
 
 def main():
@@ -37,6 +36,7 @@ def main():
         f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}",
         pool_pre_ping=True,
     )
+    Base.metadata.create_all(engine)
 
     # Create session using sessionmaker
     Session = sessionmaker(bind=engine)
