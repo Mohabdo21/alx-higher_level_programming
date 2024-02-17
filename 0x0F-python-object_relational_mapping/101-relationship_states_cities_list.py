@@ -32,20 +32,21 @@ def main():
     password = sys.argv[2]
     database = sys.argv[3]
 
-    try:
-        # Create SQLAlchemy engine with appropriate connection string
-        engine = create_engine(
-            f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}",
-            pool_pre_ping=True,
-        )
+    # Create SQLAlchemy engine with appropriate connection string
+    engine = create_engine(
+        f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}",
+        pool_pre_ping=True,
+    )
 
-        # Create session using sessionmaker
-        Session = sessionmaker(bind=engine)
-        session = Session()
+    # Create session using sessionmaker
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-        for state in session.query(State):
-            print('{}: {}'.format(state.id, state.name))
+    for state in session.query(State):
+        print("{}: {}".format(state.id, state.name))
         # Query states with eager loading for cities, ordered by state ID
+
+
 #        for state in (
 #            session.query(State)
 #            .options(joinedload(State.cities))
@@ -55,15 +56,6 @@ def main():
 #            print(f"{state.id}: {state.name}")
 #            for city in state.cities:
 #                print(f"\t{city.id}: {city.name}")
-
-    except SQLAlchemyError as e:
-        print(f"Database error: {e}")
-        sys.exit(1)
-    except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
-    finally:
-        session.close()
 
 
 if __name__ == "__main__":
