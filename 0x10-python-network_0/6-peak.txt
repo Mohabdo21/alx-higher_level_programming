@@ -1,2 +1,2 @@
 The complexity of the find_peak function is:
-O(nlog(n))
+O(log(n))
