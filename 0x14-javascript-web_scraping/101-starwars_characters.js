@@ -1,36 +1,36 @@
 #!/usr/bin/node
-// Import modules
+// Import needed modules
+const { promisify } = require('util');
 const request = require('request');
-const util = require('util');
 
-// Convert request.get to a function returns a promise
-const getRequest = util.promisify(request.get);
+// Convert request.get to a function that returns a promise
+const getRequest = promisify(request.get);
 
-// Get movie ID from CL args
-const movieID = process.argv[2];
+async function getMovieCharacters (movieId) {
+  const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
-const url = `https://swapi-api.alx-tools.com/api/films/${movieID}`;
-
-// Make the GET request
-getRequest(url)
-  .then((response) => {
+  try {
+    const response = await getRequest(url);
     const movie = JSON.parse(response.body);
     const characterUrls = movie.characters;
 
-    // Create array of promises
-    const promises = characterUrls.map((characterUrl) =>
-      getRequest(characterUrl)
+    // Use async/await for cleaner Promise handling
+    const characters = await Promise.all(
+      characterUrls.map((characterUrl) =>
+        getRequest(characterUrl).then((response) => JSON.parse(response.body))
+      )
     );
 
-    // Wait for all promises to resolve
-    return Promise.all(promises);
-  })
-  .then((responses) => {
-    responses.forEach((response) => {
-      const character = JSON.parse(response.body);
-      console.log(character.name);
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+    characters.forEach((character) => console.log(character.name));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const movieId = process.argv[2];
+
+if (movieId) {
+  getMovieCharacters(movieId);
+} else {
+  console.error('Please provide a movie ID as an argument.');
+}
